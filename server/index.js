@@ -4,7 +4,6 @@ const config = require('config');
 const fs = require('fs');
 
 const logs = fs.createWriteStream('log.txt', { flags: 'w' });
-const machine = 'Public-Windows-XP';
 
 const special = {
 	m_up: {
@@ -221,7 +220,7 @@ Bot.connect().then(() => {
 			const command = [
 				'qemu-monitor-command',
 				'--hmp',
-				machine
+				config.get('machine')
 			].concat(special[chatter.msg].command);
 
 			spawn('virsh', command);
@@ -232,7 +231,7 @@ Bot.connect().then(() => {
 			spawn('virsh', [
 				'qemu-monitor-command',
 				'--hmp',
-				machine,
+				config.get('machine'),
 				'sendkey',
 				chatter.msg
 			]);
