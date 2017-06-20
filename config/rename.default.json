@@ -1,9 +1,9 @@
 {
 	"api": {
 		"twitch": {
-			username: 'moustacheminer_com',
-			oauth: 'oauth:',
-			channel: 'moustacheminer_com'
+			"username": "moustacheminer_com",
+			"oauth": "oauth:",
+			"channel": "moustacheminer_com"
 		}
 	}
 }
