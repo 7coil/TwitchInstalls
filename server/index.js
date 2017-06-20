@@ -6,26 +6,60 @@ const fs = require('fs');
 const logs = fs.createWriteStream('log.txt', { flags: 'w' });
 const machine = 'Public-Windows-XP';
 
-const mouse = {
+const special = {
 	m_up: {
-		x: 0,
-		y: 20,
-		name: 'up'
+		command: [
+			'mouse_move',
+			'0',
+			'20'
+		],
+		type: 'mouse_move',
+		message: 'Moved mouse upwards'
 	},
 	m_down: {
-		x: 0,
-		y: -20,
-		name: 'down'
+		command: [
+			'mouse_move',
+			'0',
+			'-20'
+		],
+		message: 'Moved mouse downwards'
 	},
 	m_left: {
-		x: -20,
-		y: 0,
-		name: 'left'
+		command: [
+			'mouse_move',
+			'-20',
+			'0'
+		],
+		message: 'Moved mouse left'
 	},
 	m_right: {
-		x: 20,
-		y: 0,
-		name: 'right'
+		command: [
+			'mouse_move',
+			'20',
+			'0'
+		],
+		message: 'Moved mouse right'
+	},
+	l_click: {
+		command: [
+			'mouse_button',
+			'1'
+		],
+		message: 'Pressed left mouse button'
+	},
+	m_click: {
+		command: [
+			'mouse_button',
+			'2'
+		],
+		message: 'Pressed left mouse button'
+	},
+	r_click: {
+		command: [
+			'mouse_button',
+			'3'
+		],
+		message: 'Pressed left mouse button'
 	}
 };
 
@@ -181,18 +215,19 @@ Bot.connect().then(() => {
 	log('Welcome to Moustacheminer Server Services');
 	// Listen for all messages in channel
 	Bot.listen((err, chatter) => {
-		console.dir(chatter);
-		if (mouse[chatter.msg]) {
-			log(`${chatter.user}: Moved mouse ${mouse[chatter.msg].name}`);
-			spawn('virsh', [
+		if (special[chatter.msg]) {
+			log(`${chatter.user}: ${special[chatter.msg].message}`);
+
+			const command = [
 				'qemu-monitor-command',
 				'--hmp',
-				machine,
-				'mouse_move',
-				mouse[chatter.msg].x,
-				mouse[chatter.msg].y
-			]);
+				machine
+			].concat(special[chatter.msg].command);
+
+			spawn('virsh', command);
 		} else if (chatter.msg.split('-', 4).every(elem => keys.includes(elem))) {
+			// Keypress parser
+
 			log(`${chatter.user}: Pressed ${chatter.msg}`);
 			spawn('virsh', [
 				'qemu-monitor-command',

@@ -1,1 +1,2 @@
 Welcome to Moustacheminer Server Services
+moustacheminer_com: Pressed left mouse button
