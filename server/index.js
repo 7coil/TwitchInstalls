@@ -192,7 +192,7 @@ Bot.connect().then(() => {
 				mouse[chatter.msg].x,
 				mouse[chatter.msg].y
 			]);
-		} else if (chatter.msg.split('-').every(elem => keys.includes(elem))) {
+		} else if (chatter.msg.split('-', 4).every(elem => keys.includes(elem))) {
 			log(`${chatter.user}: Pressed ${chatter.msg}`);
 			spawn('virsh', [
 				'qemu-monitor-command',
