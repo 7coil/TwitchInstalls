@@ -212,6 +212,7 @@ const Bot = new TwitchBot(config.get('api').twitch);
 /* Connect bot to Twitch IRC */
 Bot.connect().then(() => {
 	log('Welcome to Moustacheminer Server Services');
+	log(`Sending keypresses to: ${config.get('machine')}`);
 	// Listen for all messages in channel
 	Bot.listen((err, chatter) => {
 		if (special[chatter.msg]) {
