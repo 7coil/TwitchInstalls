@@ -47,7 +47,7 @@ Bot.connect().then(() => {
 				'--hmp',
 				machine,
 				'sendkey',
-				chatter.msg.substring(0, 10)
+				chatter.msg.substring(0, 50)
 			]);
 		}
 	});
