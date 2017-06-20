@@ -31,14 +31,14 @@ Bot.connect().then(() => {
 
 	// Listen for all messages in channel
 	Bot.listen((err, chatter) => {
-		if (mouse[chatter]) {
+		if (mouse[chatter.msg]) {
 			spawn('virsh', [
 				'qemu-monitor-command',
 				'--hmp',
 				machine,
 				'mouse_move',
-				mouse[chatter].x,
-				mouse[chatter].y
+				mouse[chatter.msg].x,
+				mouse[chatter.msg].y
 			]);
 		} else {
 			spawn('virsh', [
@@ -46,7 +46,7 @@ Bot.connect().then(() => {
 				'--hmp',
 				machine,
 				'sendkey',
-				chatter.toLowerCase().subscring(0, 10)
+				chatter.msg.toLowerCase().subscring(0, 10)
 			]);
 		}
 	});
