@@ -1,0 +1,17 @@
+{
+	"name": "twitchinstalls",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node server/"
+	},
+	"author": "7coil",
+	"license": "MIT",
+	"dependencies": {
+		"config": "^1.26.1",
+		"eslint": "^4.0.0",
+		"node-twitchbot": "^2.0.4"
+	}
+}
